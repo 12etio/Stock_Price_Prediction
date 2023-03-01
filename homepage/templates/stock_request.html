@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	{%load static%}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
+	rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Stock Request</title>
+	<link rel="stylesheet" href={% static "style.css"%}>
+</head>
+
+<body>
+	{% include 'navbar.html'%}
+	<form action="" method="POST" class="form-horizontal">
+		{% csrf_token%}
+		<div class="mx-auto" style="width: 400px;">
+
+			<div class="col-xs-8 col-xs-offset-4">
+				<h2 style="text-align:center;">Stock Request Form</h2>
+			</div>
+			<hr />
+			<div class="form-group">
+				<label for="symbol">Symbol</label>
+				<input type="text" class="form-control" name="symbol" id="symbol" placeholder="Enter symbol for NASDAQ stock"
+					Required>
+			</div>
+			<div class="form-group">
+				<label for="start_date">Start Date</label>
+				<input type="date" class="form-control" name="start_date" id="start_date" placeholder="Enter the date you'd like to start training the model on">
+			</div>
+			<div class="form-group">
+				<label for="end_date">End Date</label>
+				<input type="date" class="form-control" name="end_date" id="end_date" placeholder="Enter last date">
+			</div>
+			<div class="form-group">
+				<label for="num_epochs">Number of Epochs</label>
+				<input type="number" class="form-control" name="num_epochs" id="num_epochs" placeholder="Enter number of epochs" Required>
+			</div>
+			<div class="form-group">
+				<label for="batch_size">Batch Size</label>
+				<input type="number" class="form-control" name="batch_size" id="batch_size" placeholder="Enter the batch size">
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	</form>
+	<div class="form-group">
+		{% for message in messages %}
+		<div class="alert alert-danger" role="alert">
+			{{message}}
+		</div>
+		{% endfor %}
+	</div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

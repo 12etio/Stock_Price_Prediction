@@ -1,0 +1,178 @@
+<!doctype html>
+
+{%load static%}
+
+<html lang = en>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StocPre {{stock_name}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src='https://cdn.plot.ly/plotly-2.18.0.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+    <link rel="stylesheet" href={% static "style.css"%}>
+</head>
+
+
+
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <div class="container-fluid bg-dark">
+      <h1 class="p-4 text-center text-white">{{stock_name}}</h1>
+    </div>
+    {% include 'navbar.html'%}
+    <div class="container-sm mx-auto" style="font-size: 21px">
+      <div class="row">
+        <div class="col bg-dark text-white mx-2 p-3 rounded-3 text-center">
+          <p>Current price: {{current_data.current_price}}</p>
+        </div>
+        <div class="col bg-dark text-white mx-2 p-3 rounded-3 text-center">
+          <p>Open price: {{current_data.open_price}}</p>
+        </div>
+        <div class="col bg-dark mx-2 p-3 rounded-3 text-center" id="perc">
+          <p>Price change: ({{current_data.daily_perc_change}}%) {{current_data.daily_change}}</p>
+        </div>
+        <script>
+          var percElement = document.getElementById("perc");
+          var dailyPercChange = {{current_data.daily_perc_change}};
+          if (dailyPercChange < 0) {
+            percElement.style.color = "red";
+          } else {
+            percElement.style.color = "green";
+          }
+        </script>
+      </div>
+    </div>
+    <br>
+    <div class="mv-auto" id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
+    <script>
+      var xArray = decodeURIComponent("{{stock_data.prediction_dates}}");
+      var yArray = {{stock_data.prediction_data}};
+      var xString = xArray.replace(']', '');
+      var xString = xString.replace('[', '');
+      var xValues = xArray.split(',');
+
+      var xArray2 = decodeURIComponent("{{stock_data.train_dates}}");
+      var yArray2 = {{stock_data.train}};
+      var xString2 = xArray2.replace(']', '');
+      var xString2 = xString2.replace('[', '');
+      var xValues2 = xString2.split(',')   
+      
+    
+      var trace1 = {
+        type: "scatter",
+        mode: "lines",
+        name: "prediction",
+        x:xValues,
+        y:yArray,
+        markers: {
+          color: "#FFFFFF"
+        },
+        line: {color: '#FFE800'}
+      }; 
+
+      var trace2 = {
+        type: "scatter",
+        mode: "lines",
+        name: "past data",
+        x:xValues2,
+        y:yArray2,
+        markers: {
+          color: "#FFFFFF"
+        },
+        line: {color: '#17BECF'}
+      };
+
+      var data = [trace2,trace1];  
+
+      var layout =   {
+        height: 700,
+        title: {
+          text: '{{stock_name}}',
+          font: {
+            size: 36,
+            color: "#FFFFFF"
+          }
+        },
+        xaxis: {
+          title: {
+            text: 'Date',
+            font: {
+              size: 18,
+              color: '#FFFFFF'
+            }
+          },
+        },
+        yaxis: {
+          title: {
+            text: 'Price ($)',
+            font: {
+              size: 18,
+              color: '#FFFFFF'
+            }
+          }
+        },
+        plot_bgcolor:"#222222",
+        paper_bgcolor:"#111111",
+      };
+
+      Plotly.newPlot('myDiv', data, layout);
+    </script>
+  </body>
+</html> 
+
+
+
+{% comment %} <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+  <script>
+    var xArray = decodeURIComponent("{{stock_data.prediction_dates}}");
+    var yArray = {{stock_data.prediction_data}};
+    var xValues = xArray.split(',')
+
+    
+    new Chart("myChart", {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [{
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(0,0,255,1.0)",
+          borderColor: "rgba(0,0,255,0.1)",
+          data: yArray
+        }]
+      },
+    });
+    </script>
+    
+
+  </body>
+  </html>  {% endcomment %}
+
+
+   {% comment %} var arrayx = []; 
+
+
+  for (var i = 0; i < xValues.length; i++) {
+      var dateString = xValues[i]
+      var dateString = dateString.replace(']', '');
+      var dateString = dateString.replace(/'/g, '');
+      
+      // Split the date string into day, month, and year
+      var parts = dateString.split('-');
+      var day = parts[2].slice(0, parts[2].length -6);
+      var month = parts[1];
+      var year = parts[0].slice(7); 
+      
+      
+      // Create a date object from the day, month, and year
+      var date = new Date(year, month - 1, day);
+      // Push the date object into the arrayx
+      arrayx.push(date);
+  }; {% endcomment %}
+
+    {% comment %} var xValues = [1,2,3,4,5,6,7,8,9,10]
+    var yArray = [12,32,43,54,645,46,74,24,36,47]
+    var xValues2 = [5,6,7,8,9,10,11,12,13,14]
+    var yArray2 = [16,72,38,61,37,14,35,74,58,24]   {% endcomment %}

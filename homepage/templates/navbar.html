@@ -1,0 +1,39 @@
+<div class="container-fluid m-2 p-2 border" id="navbar" style="font-size:20px">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+    </li>
+    
+    {% if user.is_authenticated %}
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Stocks</a>
+      <ul class="dropdown-menu dropdown-menu-dark">
+        <div class="text text-white px-2">
+          <pre>
+Disclaimer:
+Pages take about 20s to load</pre>
+        </div>
+        <li><a class="dropdown-item" href="http://127.0.0.1:8000/tsla/">Tesla</a></li>
+        <li><a class="dropdown-item" href="http://127.0.0.1:8000/aapl/">Apple</a></li>
+        <li><a class="dropdown-item" href="http://127.0.0.1:8000/amzn/">Amazon</a></li>
+        <li><a class="dropdown-item" href="http://127.0.0.1:8000/goog/">Google</a></li>
+        <li><a class="dropdown-item" href="http://127.0.0.1:8000/msft/">Microsoft</a></li>
+        <li><a class="dropdown-item" href="http://127.0.0.1:8000/nvda/">Nvidia</a></li>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="http://127.0.0.1:8000/stock_request/">Request A Prediction</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="http://127.0.0.1:8000/logout_user/">LOGOUT</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="http://127.0.0.1:8000/register/">SIGN UP</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="http://127.0.0.1:8000/login_user/">LOGIN</a>
+    </li>
+    {% endif %}
+  </ul>
+</div>

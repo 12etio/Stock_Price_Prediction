@@ -1,0 +1,116 @@
+<!doctype html>
+
+
+<html lang="en">
+  <head>
+    {%load static%}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>StocPre</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href={% static "style.css"%}>
+</head>
+
+<body>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    
+  <div class="p-2 bg-dark text-white">
+    <h1 class="text-center" style="font-size:5vw">StocPre</h1>
+  </div>
+
+  {% include 'navbar.html'%}
+
+
+  <div class="row text-white">
+    <div class="col ms-4 my-2 bg-dark rounded-3">
+      <h3 style = "font-size:2.3vw">About StocPre</h3>
+      <p style = "font-size:2vw">StocPre is a stock trading aid which aims to help new traders by providing them 
+        with predictions about the future prices of stocks.</p>
+    </div>
+    <div class="col mx-3 my-2 bg-dark rounded-3">
+      <h3 style = "font-size:2.3vw">How?</h3>
+      <p style = "font-size:2vw">StocPre predicts the prices of stocks using machine learning. 
+        By training LSTM models on historical data, the machine learns the patterns of the stocks movements.
+      Thus, it is able to make informed predictions about the future prices.</p> 
+    </div>
+    <div class="col me-3 my-2 bg-dark rounded-3">
+      <h3 style = "font-size:2.3vw">Getting Started</h3>
+      <p style = "font-size:2vw">To access all of the features in StocPre simply sign up and log in.
+         Once you've logged in you'll be able to see the stocks readily available on the site and more.</p> 
+    </div>
+  </div>
+  <br>
+  {%if user.is_authenticated%}
+  <h3 class="text-white mx-3">Available Stocks</h3>
+  <div class="row mx-auto">
+    <div class="col bg-dark text-white mx-2 rounded-3 text-center">
+      <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#myModal">
+        <h5>Apple</h5>
+        <a href="/aapl" data-toggle="modal"><img src="https://www.freepnglogos.com/uploads/apple-logo-png/apple-logo-png-dallas-shootings-don-add-are-speech-zones-used-4.png" class="rounded mx-auto d-block" style="width:200px;height:200px;"/></a>
+      </button>
+    </div>
+    <div class="col bg-dark text-white mx-2 rounded-3 text-center">
+      <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#myModal">
+        <h5 class="text">Amazon</h5>
+        <a href="/amzn"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg" class="rounded mx-auto d-block" style="width:200px;height:200px;"></a>
+      </button>
+    </div>
+    <div class="col bg-dark text-white mx-2 rounded-3 text-center">
+      <button type="button " class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#myModal">
+        <h5>Google</h5>
+        <a href="/goog"><img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" class="rounded mx-auto d-block" style="width:200px;height:200px;"></a>
+      </button>
+    </div>
+    <div class="col bg-dark text-white mx-2 rounded-3 text-center">
+      <button type="button " class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#myModal">
+        <h5>Microsoft</h5>
+        <a href="/msft"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAlJ6No3s5MBB3r7JyNzE7_fIR_24RYS_FcXC8qoiL4lvtuSghgUzYC7jBmGflwLWTfZg&usqp=CAU" class="rounded mx-auto d-block" style="width:200px;height:200px;"></a>
+      </button>
+    </div>
+  </div>
+  
+  <div class="row mx-auto">
+    <div class="col"></div>
+    <div class="col bg-dark text-white mx-2 my-3 rounded-3 text-center">
+      <button type="button " class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#myModal">
+        <h5 class="text text-center mt-2">Nvidia</h5>
+        <a href="/nvda"><img src="https://brandslogos.com/wp-content/uploads/images/large/nvidia-logo.png" class="rounded mx-auto d-block" style="width:200px;height:200px;"></a>
+      </button>
+    </div>
+    <div class="col bg-dark text-white mx-2 my-3 rounded-3 text-center">
+      <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#myModal">
+        <h5>Tesla</h5>
+        <a href="/tsla" data-toggle="modal"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png" class="rounded mx-auto d-block" style="width:200px;height:200px;"/></a>
+      </button>
+    </div>
+    <div class="col"></div>
+  </div> 
+{%else%}
+{%endif%}
+
+
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: black">
+      <div class="modal-header">
+        <h4 class="modal-title" style="font-size: 30px">Disclaimer</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" style="font-size: 20px">
+        Pages take about 20s to load, please wait
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  </body>
+</html> 

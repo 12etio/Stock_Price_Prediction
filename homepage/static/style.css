@@ -1,0 +1,14 @@
+body {
+    background-color: rgb(0, 0, 0);
+    font-family: roboto;
+    color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    margin-right: 3px;
+    margin-left: 3px;
+  };
+
+#navbar {
+    font-size: 30px;
+    color: rgb(27, 27, 27);
+};
+
