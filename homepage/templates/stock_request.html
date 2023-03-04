@@ -16,45 +16,71 @@
 
 <body>
 	{% include 'navbar.html'%}
-	<form action="" method="POST" class="form-horizontal">
-		{% csrf_token%}
-		<div class="mx-auto" style="width: 400px;">
+	<div class="row mx-auto">
+		<div class="col text-white mx-2 my-3 rounded-3 text-center"></div>
+		<div class="col">
+			<form action="" method="POST" class="form-horizontal">
+				{% csrf_token%}
+				<div class="" style="width: 600px; height: 800px;">
 
-			<div class="col-xs-8 col-xs-offset-4">
-				<h2 style="text-align:center;">Stock Request Form</h2>
-			</div>
-			<hr />
-			<div class="form-group">
-				<label for="symbol">Symbol</label>
-				<input type="text" class="form-control" name="symbol" id="symbol" placeholder="Enter symbol for NASDAQ stock"
-					Required>
-			</div>
-			<div class="form-group">
-				<label for="start_date">Start Date</label>
-				<input type="date" class="form-control" name="start_date" id="start_date" placeholder="Enter the date you'd like to start training the model on">
-			</div>
-			<div class="form-group">
-				<label for="end_date">End Date</label>
-				<input type="date" class="form-control" name="end_date" id="end_date" placeholder="Enter last date">
-			</div>
-			<div class="form-group">
-				<label for="num_epochs">Number of Epochs</label>
-				<input type="number" class="form-control" name="num_epochs" id="num_epochs" placeholder="Enter number of epochs" Required>
-			</div>
-			<div class="form-group">
-				<label for="batch_size">Batch Size</label>
-				<input type="number" class="form-control" name="batch_size" id="batch_size" placeholder="Enter the batch size">
-			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+					<div class="col-xs-8 col-xs-offset-4">
+						<h2 style="text-align:center;">Stock Request Form</h2>
+					</div>
+					<hr />
+					<div class="form-group">
+						<label for="symbol">Symbol</label>
+						<input type="text" class="form-control" name="symbol" id="symbol" placeholder="Enter symbol for NASDAQ stock"
+							Required>
+					</div>
+					<div class="form-group">
+						<label for="start_date">Start Date</label>
+						<input type="date" class="form-control" name="start_date" id="start_date" placeholder="Enter the date you'd like to start training the model on">
+					</div>
+					<div class="form-group">
+						<label for="end_date">End Date</label>
+						<input type="date" class="form-control" name="end_date" id="end_date" placeholder="Enter last date">
+					</div>
+					<div class="form-group">
+						<label for="num_epochs">Number of Epochs</label>
+						<input type="number" class="form-control" name="num_epochs" id="num_epochs" placeholder="Enter number of epochs" Required>
+					</div>
+					<div class="form-group">
+						<label for="batch_size">Batch Size</label>
+						<input type="number" class="form-control" name="batch_size" id="batch_size" placeholder="Enter the batch size">
+					</div>
+					<button type="submit" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#Modal2">Submit</button>
+				</div>
+			</form>
 		</div>
-	</form>
-	<div class="form-group">
-		{% for message in messages %}
-		<div class="alert alert-danger" role="alert">
-			{{message}}
+		<div class="col text-white mx-2 my-3 rounded-3 text-center"></div>
+	<div class="row mx-auto">
+				
+			<div class="form-group">
+				{% for message in messages %}
+				<div class="alert alert-danger" role="alert">
+					{{message}}
+				</div>
+				{% endfor %}
+			</div>
+
+	<div class="modal" id="Modal2">
+		<div class="modal-dialog">
+		  <div class="modal-content" style="background-color: black">
+			<div class="modal-header">
+			  <h4 class="modal-title" style="font-size: 30px">Disclaimer</h4>
+			  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body" style="font-size: 20px">
+			  The page modal is being trained, the time this will take can vary depending on the 
+			  number of epochs you've chosen, the dates and batch size. So please wait
+			  <br>
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+			</div>
+		  </div>
 		</div>
-		{% endfor %}
-	</div>
+	  </div>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

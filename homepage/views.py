@@ -119,6 +119,7 @@ def stock_request(request):
                 return redirect("http://127.0.0.1:8000/stock_request/")
             else:
                 user_request = UserRequest(symbol=symbol, start_date=start_date, end_date=end_date, num_epochs=num_epochs, batch_size=batch_size)
+                user_request.user = request.user
                 user_request.save()
                 stock_name = symbol
                 obj = Stock_price_prediction.StockPricePredictor(symbol, start_date, end_date, int(num_epochs), int(batch_size))

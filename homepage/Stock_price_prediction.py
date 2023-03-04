@@ -110,16 +110,20 @@ class StockPricePredictor:
     validation_dates = dates[self.training_data_len:self.scaled_data_len]
     prediction_data = data[self.scaled_data_len:]
     prediction_dates = dates[self.scaled_data_len:]
-    plt.figure(figsize=(16,8))
-    plt.title('Model')
-    plt.xlabel('Date')
-    plt.ylabel('Close Price USD ($)')
-    plt.plot(train_dates, train)
-    plt.plot(prediction_dates, prediction_data)
-    plt.plot(validation_dates, validation_data)
-    plt.plot(validation_dates, predict1)
-    plt.legend(['Train', 'Predictions','validation' ,'predict1'], loc='lower right')
-    plt.show()
+    fig = px.line(x=train_dates, y=train, title = "Stock Data")
+    fig.add_scatter(x=validation_dates, y=predict1)
+    # fig.add_scatter(x=validation_dates, y=validation_data)
+    fig.show()
+    # plt.figure(figsize=(16,8))
+    # plt.title('Model')
+    # plt.xlabel('Date')
+    # plt.ylabel('Close Price USD ($)')
+    # plt.plot(train_dates, train)
+    # plt.plot(prediction_dates, prediction_data)
+    # plt.plot(validation_dates, validation_data)
+    # plt.plot(validation_dates, predict1)
+    # plt.legend(['Train', 'Predictions','validation' ,'predict1'], loc='lower right')
+    # plt.show()
   
   def predict_future_price(self):
     loaded_model = keras.models.load_model(self.stock_path)
